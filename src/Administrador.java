@@ -6,6 +6,7 @@ String rol;
 
 String direccion;
 
+int numtelefono;
     public Administrador(String direccion) {
         this.direccion = direccion;
     }
@@ -23,6 +24,7 @@ String direccion;
         this.edad = edad;
         this.direccion = direccion;
         this.rol = rol;
+        this.numtelefono = numtelefono;
 
 
     }
@@ -31,6 +33,13 @@ String direccion;
         return nombre;
     }
 
+    public int getNumtelefono() {
+        return numtelefono;
+    }
+
+    public void setNumtelefono(int numtelefono) {
+        this.numtelefono = numtelefono;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
