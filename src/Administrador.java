@@ -4,6 +4,12 @@ String nombre;
 int edad;
 String rol;
 
+    public Administrador(String nombre, int edad, String rol) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.rol = rol;
+    }
+
     public String getNombre() {
         return nombre;
     }
