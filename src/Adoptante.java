@@ -55,4 +55,26 @@ public class Adoptante {
         this.id = id;
     }
     public static ArrayList<Adoptante> adoptanteList = new ArrayList<>();
+
+    // Método para registrar un nuevo adoptante
+    public static void registerAdoptante(Scanner scanner) {
+        Adoptante adoptante = new Adoptante();
+        System.out.print("Nombre: ");
+        adoptante.setName(scanner.nextLine());
+        System.out.print("Dirección: ");
+        adoptante.setAddress(scanner.nextLine());
+        System.out.print("Número de contacto: ");
+        adoptante.setContactNumber(scanner.nextLine());
+        System.out.print("Preferencias de adopción: ");
+        adoptante.setAdoptionPreferences(scanner.nextLine());
+
+        // Generar un ID único en secuencia
+        adoptante.setId(adoptanteList.size() + 1);
+
+        adoptanteList.add(adoptante);
+        System.out.println("Adoptante registrado con éxito.");
+
+        // Llama al método para crear una nueva hoja en el archivo Excel
+        Tools.createSheetForAdoptante(adoptante);
+    }
 }
