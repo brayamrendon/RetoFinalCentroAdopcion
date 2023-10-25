@@ -14,4 +14,45 @@ public class Adoptante {
         this.contactNumber = contactNumber;
         this.adoptionPreferences = adoptionPreferences;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getAdoptionPreferences() {
+        return adoptionPreferences;
+    }
+
+    public void setAdoptionPreferences(String adoptionPreferences) {
+        this.adoptionPreferences = adoptionPreferences;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    public static ArrayList<Adoptante> adoptanteList = new ArrayList<>();
 }
