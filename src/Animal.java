@@ -82,4 +82,96 @@ public class Animal {
     public void setId(int id) {
         this.id = id;
     }
+
+    public static ArrayList<Animal> animalList = new ArrayList<>();
+
+    // Método para crear un nuevo animal
+    public static void createAnimal(Scanner scanner) {
+        Animal animal = new Animal();
+        System.out.print("Nombre del animal: ");
+        animal.setName(scanner.nextLine());
+        System.out.print("Edad: ");
+        animal.setAge(scanner.nextInt());
+        scanner.nextLine(); // Limpia el salto de línea
+        System.out.print("Especie: ");
+        animal.setSpecies(scanner.nextLine());
+        System.out.print("Raza: ");
+        animal.setRace(scanner.nextLine());
+        System.out.print("Estado de salud: ");
+        animal.setHealthStatus(scanner.nextLine());
+        System.out.print("Descripción: ");
+        animal.setDescription(scanner.nextLine());
+
+        // Generar un ID único en secuencia
+        animal.setId(animalList.size() + 1);
+
+        // Agregar el animal a la lista
+        animalList.add(animal);
+
+        // Guardar el animal en la hoja de Excel
+        Tools.saveAnimalToExcel(animal);
+    }
+
+    // Método para editar un animal existente
+    public static void editAnimal(Scanner scanner) {
+        System.out.print("Ingrese el ID del animal a editar: ");
+        int idToEdit = scanner.nextInt();
+        scanner.nextLine(); // Limpiar el salto de línea
+
+        for (Animal animal : animalList) {
+            if (animal.getId() == idToEdit) {
+                // Permitir editar las propiedades del animal
+                System.out.print("Nuevo nombre: ");
+                animal.setName(scanner.nextLine());
+                System.out.print("Nueva edad: ");
+                animal.setAge(scanner.nextInt());
+                scanner.nextLine(); // Limpiar el salto de línea
+                System.out.print("Nueva especie: ");
+                animal.setSpecies(scanner.nextLine());
+                System.out.print("Nueva raza: ");
+                animal.setRace(scanner.nextLine());
+                System.out.print("Nuevo estado de salud: ");
+                animal.setHealthStatus(scanner.nextLine());
+                System.out.print("Nueva descripción: ");
+                animal.setDescription(scanner.nextLine());
+
+                // Actualizar el animal en la hoja de Excel
+                Tools.updateAnimalInExcel(animal);
+                System.out.println("Animal editado con éxito.");
+                return;
+            }
+        }
+        System.out.println("Animal no encontrado.");
+    }
+
+    // Método para ver la lista de animales
+    public static void viewAnimals() {
+        for (Animal animal : animalList) {
+            System.out.println("ID: " + animal.getId());
+            System.out.println("Nombre: " + animal.getName());
+            System.out.println("Edad: " + animal.getAge());
+            System.out.println("Especie: " + animal.getSpecies());
+            System.out.println("Raza: " + animal.getRace());
+            System.out.println("Estado de salud: " + animal.getHealthStatus());
+            System.out.println("Descripción: " + animal.getDescription());
+            System.out.println();
+        }
+    }
+
+    // Método para eliminar un animal
+    public static void deleteAnimal(Scanner scanner) {
+        System.out.print("Ingrese el ID del animal a eliminar: ");
+        int idToDelete = scanner.nextInt();
+
+        for (Animal animal : animalList) {
+            if (animal.getId() == idToDelete) {
+                animalList.remove(animal);
+                // Eliminar el animal de la hoja de Excel
+                Tools.deleteAnimalInExcel(animal);
+                System.out.println("Animal eliminado con éxito.");
+                return;
+            }
+        }
+        System.out.println("Animal no encontrado.");
+    }
 }
