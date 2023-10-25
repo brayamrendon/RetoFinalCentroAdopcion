@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.List;
 
 
-public class Empleados {
+public class Empleado {
     private int id;
     private String name;
     private String rol;
