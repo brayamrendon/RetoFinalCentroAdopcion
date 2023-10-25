@@ -50,3 +50,30 @@ public class Administrador {
     }
 
     public static ArrayList<Administrador> adminList = new ArrayList<>();
+
+    public static void registerAdmin(Scanner scanner) {
+        Administrador admin = new Administrador();
+        admin.setName(scanner.nextLine());
+        admin.setRol("Administrador"); // Puedes establecer el rol como "Administrador" automáticamente
+        System.out.print("Contraseña: ");
+        admin.setPassword(scanner.nextLine());
+
+        // Genera un ID único en secuencia automática
+        admin.setId(adminList.size() + 1);
+
+        adminList.add(admin);
+        System.out.println("Administrador registrado con éxito.");
+    }
+
+
+
+    public static Administrador loginAdmin(int id, String password) {
+        for (Administrador admin : adminList) {
+            if (admin.getId() == id && admin.getPassword().equals(password)) {
+                return admin;
+            }
+        }
+        return null; // Retorna null si no se encuentra un administrador con el ID y contraseña proporcionados
+    }
+
+}
