@@ -1,71 +1,36 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Administrador {
+    private int id;
+    private String name;
+    private String rol;
+    private String password;
 
-String nombre;
-int edad;
-String rol;
-
-String direccion;
-
-int numtelefono;
-
-String apellido;
+    // Constructor y métodos getters y setters
 
 
-    public Administrador(String direccion) {
-        this.direccion = direccion;
-    }
-
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public Administrador(String nombre, int edad, String rol) {
-        this.nombre = nombre;
-        this.edad = edad;
-        this.direccion = direccion;
+    public Administrador() {
+        this.id = id;
+        this.name = name;
         this.rol = rol;
-        this.numtelefono = numtelefono;
-        this.apellido = apellido;
-
-
 
     }
 
-    public String getNombre() {
-        return nombre;
+    public int getId() {
+        return id;
     }
 
-    public int getNumtelefono() {
-        return numtelefono;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getName() {
+        return name;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public void setNumtelefono(int numtelefono) {
-        this.numtelefono = numtelefono;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRol() {
@@ -75,4 +40,40 @@ String apellido;
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public static ArrayList<Administrador> adminList = new ArrayList<>();
+
+    public static void registerAdmin(Scanner scanner) {
+        Administrador admin = new Administrador();
+        admin.setName(scanner.nextLine());
+        admin.setRol("Administrador"); // Puedes establecer el rol como "Administrador" automáticamente
+        System.out.print("Contraseña: ");
+        admin.setPassword(scanner.nextLine());
+
+        // Genera un ID único en secuencia automática
+        admin.setId(adminList.size() + 1);
+
+        adminList.add(admin);
+        System.out.println("Administrador registrado con éxito.");
+    }
+
+
+
+    public static Administrador loginAdmin(int id, String password) {
+        for (Administrador admin : adminList) {
+            if (admin.getId() == id && admin.getPassword().equals(password)) {
+                return admin;
+            }
+        }
+        return null; // Retorna null si no se encuentra un administrador con el ID y contraseña proporcionados
+    }
+
 }
