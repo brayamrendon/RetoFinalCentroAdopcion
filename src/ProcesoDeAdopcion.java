@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -6,7 +7,7 @@ public class ProcesoDeAdopcion {
         System.out.println("Lista de animales disponibles:");
 
         for (Animal animal : Animal.animalList) {
-            if (animal.getHealthStatus().equalsIgnoreCase("Disponible")) {
+            if (animal.getHealthStatus().equalsIgnoreCase("disponible")) {
                 // Si el estado de salud es "Disponible," muestra el animal
                 System.out.println("Nombre: " + animal.getName());
                 System.out.println("Especie: " + animal.getSpecies());
@@ -24,7 +25,7 @@ public class ProcesoDeAdopcion {
         int index = 1;
 
         for (Animal animal : Animal.animalList) {
-            if (animal.getHealthStatus().equalsIgnoreCase("Disponible")) {
+            if (animal.getHealthStatus().equalsIgnoreCase("disponible")) {
                 System.out.println(index + ". " + animal.getName());
                 index++;
             }
@@ -43,7 +44,7 @@ public class ProcesoDeAdopcion {
             int selectedIndex = 0;
 
             for (Animal animal : Animal.animalList) {
-                if (animal.getHealthStatus().equalsIgnoreCase("Disponible")) {
+                if (animal.getHealthStatus().equalsIgnoreCase("disponible")) {
                     selectedIndex++;
                     if (selectedIndex == selection) {
                         selectedAnimal = animal;
@@ -77,5 +78,41 @@ public class ProcesoDeAdopcion {
         }
     }
 
+    private static List<SolicitudAdopcion> solicitudesAdopcion = new ArrayList<>();
+
+    public static List<SolicitudAdopcion> getSolicitudesAdopcion() {
+        return solicitudesAdopcion;
+    }
+
+    public static void aceptarSolicitud(Scanner scanner) {
+        // Muestra las solicitudes pendientes y permite al empleado seleccionar una para aceptar
+        List<SolicitudAdopcion> solicitudesPendientes = solicitudesAdopcion;
+
+        if (solicitudesPendientes.isEmpty()) {
+            System.out.println("No hay solicitudes de adopción pendientes.");
+            return;
+        }
+
+        System.out.println("Solicitudes de adopción pendientes:");
+        int index = 1;
+
+        for (SolicitudAdopcion solicitud : solicitudesPendientes) {
+            Adoptante adoptante = solicitud.getAdoptante();
+            Animal animal = solicitud.getAnimal();
+            System.out.println(index + ". " + adoptante.getName() + " desea adoptar " + animal.getName());
+            index++;
+        }
+
+        System.out.print("Seleccione el numero de solicitud que desea aceptar: ");
+        int selection = scanner.nextInt();
+
+        if (selection >= 1 && selection < index) {
+            SolicitudAdopcion solicitudAceptada = solicitudesPendientes.get(selection - 1);
+            solicitudesAdopcion.remove(solicitudAceptada);
+            System.out.println("Solicitud de adopcion aceptada.");
+        } else {
+            System.out.println("Selección no valida. Por favor, elija un numero de solicitud valido.");
+        }
+    }
 
 }

@@ -105,7 +105,7 @@ public class Menu {
             System.out.println("Menú de Empleado:");
             System.out.println("1. Ver lista de animales disponibles");
             System.out.println("2. Ver lista de adoptantes registrados");
-            System.out.println("3. Ver lista de adopciones realizadas");
+            System.out.println("3. Ver lista de adopciones ");
             System.out.println("4. Regresar al menú anterior");
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume la línea vacía después de nextInt().
@@ -120,7 +120,7 @@ public class Menu {
                     ProcesoDeAdopcion.verListaAdoptantes(); // Opción para ver la lista de adoptantes registrados
                     break;
                 case 3:
-                    // logica para ver adopciones realizadas
+                    ProcesoDeAdopcion.aceptarSolicitud(scanner); // Opción para aceptar una solicitud de adopción
                     break;
                 case 4:
                     System.out.println("Regresando al menú anterior.");
