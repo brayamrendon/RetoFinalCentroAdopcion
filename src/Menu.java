@@ -4,7 +4,8 @@ public class Menu {
     public static void showMainMenu(Scanner scanner) {
         int choice;
         do {
-            System.out.println("Elige una opción:");
+            System.out.println("🐶Bienvenido a peluditos felices😺");
+            System.out.println("Por Favor elige una opción para ingresar al sistema:");
             System.out.println("1. Administrador");
             System.out.println("2. Empleado");
             System.out.println("3. Adoptante");
@@ -62,7 +63,7 @@ public class Menu {
     public static void showAdminMenu(Scanner scanner) {
         int choice;
         do {
-            System.out.println("Menú de Administrador:");
+            System.out.println("🐶Menú de Administrador:😺");
             System.out.println("1. Agregar nueva mascota");
             System.out.println("2. Editar una mascota");
             System.out.println("3. Ver lista de animales");
@@ -102,7 +103,7 @@ public class Menu {
     public static void showEmployeeMenu(Scanner scanner) {
         int choice;
         do {
-            System.out.println("Menú de Empleado:");
+            System.out.println("🐶Menú de Empleado:😺");
             System.out.println("1. Ver lista de animales disponibles");
             System.out.println("2. Ver lista de adoptantes registrados");
             System.out.println("3. Ver lista de adopciones ");
@@ -134,7 +135,7 @@ public class Menu {
     public static void showAdopterMenu(Scanner scanner) {
         int choice;
         do {
-            System.out.println("Menú de Adoptante:");
+            System.out.println("🐶Menú de Adoptante:😺");
             System.out.println("1. Registrarse");
             System.out.println("2. Ver lista de animales disponibles");
             System.out.println("3. Solicitar un animal");
