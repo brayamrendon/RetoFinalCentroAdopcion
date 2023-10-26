@@ -97,7 +97,7 @@ public class Animal {
         animal.setSpecies(scanner.nextLine());
         System.out.print("Raza: ");
         animal.setRace(scanner.nextLine());
-        System.out.print("Estado de salud: ");
+        System.out.print("Estado: ");
         animal.setHealthStatus(scanner.nextLine());
         System.out.print("Descripción: ");
         animal.setDescription(scanner.nextLine());
@@ -107,7 +107,7 @@ public class Animal {
 
         // Agregar el animal a la lista
         animalList.add(animal);
-
+        System.out.println("Animal registrado con éxito.");
         // Guardar el animal en la hoja de Excel
         Tools.saveAnimalToExcel(animal);
     }
@@ -130,7 +130,7 @@ public class Animal {
                 animal.setSpecies(scanner.nextLine());
                 System.out.print("Nueva raza: ");
                 animal.setRace(scanner.nextLine());
-                System.out.print("Nuevo estado de salud: ");
+                System.out.print("Nuevo estado: ");
                 animal.setHealthStatus(scanner.nextLine());
                 System.out.print("Nueva descripción: ");
                 animal.setDescription(scanner.nextLine());
@@ -152,7 +152,7 @@ public class Animal {
             System.out.println("Edad: " + animal.getAge());
             System.out.println("Especie: " + animal.getSpecies());
             System.out.println("Raza: " + animal.getRace());
-            System.out.println("Estado de salud: " + animal.getHealthStatus());
+            System.out.println("Estado: " + animal.getHealthStatus());
             System.out.println("Descripción: " + animal.getDescription());
             System.out.println();
         }
