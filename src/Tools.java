@@ -74,6 +74,72 @@ public class Tools {
         }
     }
 
+    // Crear una nueva hoja para un empleado en el libro Excel
+    public static void createSheetForEmpleado(Empleado empleado) {
+        try {
+            Workbook workbook;
+            Sheet sheet;
+
+            // Verificar si el archivo de Excel ya existe
+            File file = new File(EXCEL_FILE_PATH);
+            if (file.exists()) {
+                FileInputStream inputStream = new FileInputStream(EXCEL_FILE_PATH);
+                workbook = WorkbookFactory.create(inputStream);
+            } else {
+                workbook = new XSSFWorkbook();
+            }
+
+            // Obtener el nombre del empleado
+            String empleadoName = empleado.getName();
+
+            // Validar que el nombre del empleado no sea nulo ni vacío
+            if (empleadoName != null && !empleadoName.trim().isEmpty()) {
+                // Crear una nueva hoja con el nombre del empleado
+                sheet = workbook.getSheet("Empleados");
+                if (sheet == null) {
+                    sheet = workbook.createSheet("Empleados");
+                }
+
+                // Crea un encabezado si la hoja está vacía
+                if (sheet.getPhysicalNumberOfRows() == 0) {
+                    Row headerRow = sheet.createRow(0);
+                    String[] headers = {"ID", "Nombre", "Rol", "Fecha de contratacion"};
+                    for (int i = 0; i < headers.length; i++) {
+                        Cell headerCell = headerRow.createCell(i);
+                        headerCell.setCellValue(headers[i]);
+                    }
+                }
+
+
+                // Agregar los datos del empleado a la hoja (puedes adaptar esto según tus necesidades)
+                Row row = sheet.createRow(sheet.getLastRowNum() + 1);
+
+                Cell idCell = row.createCell(0);
+                idCell.setCellValue(empleado.getId());
+
+                Cell nameCell = row.createCell(1);
+                nameCell.setCellValue(empleado.getName());
+
+                Cell rolCell = row.createCell(2);
+                rolCell.setCellValue(empleado.getRol());
+
+                Cell dateOfHireCell = row.createCell(3);
+                dateOfHireCell.setCellValue(empleado.getDateOfHire().toString());
+
+                // Guardar los cambios en el archivo Excel
+                FileOutputStream outputStream = new FileOutputStream(EXCEL_FILE_PATH);
+                workbook.write(outputStream);
+                workbook.close();
+                outputStream.close();
+            } else {
+                System.out.println("Error: El nombre del empleado es nulo o vacío. No se puede crear la hoja.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // Crear una nueva hoja para un adoptante en el libro Excel
     public static void createSheetForAdoptante(Adoptante adoptante) {
         try {
