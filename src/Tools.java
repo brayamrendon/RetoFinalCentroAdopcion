@@ -73,4 +73,125 @@ public class Tools {
             e.printStackTrace();
         }
     }
+
+    // Crear una nueva hoja para un adoptante en el libro Excel
+    public static void createSheetForAdoptante(Adoptante adoptante) {
+        try {
+            Workbook workbook;
+            Sheet sheet;
+
+            // Verificar si el archivo de Excel ya existe
+            File file = new File(EXCEL_FILE_PATH);
+            if (file.exists()) {
+                FileInputStream inputStream = new FileInputStream(EXCEL_FILE_PATH);
+                workbook = WorkbookFactory.create(inputStream);
+            } else {
+                workbook = new XSSFWorkbook();
+            }
+
+            // Crear una nueva hoja con el nombre del adoptante
+            sheet = workbook.getSheet("Adoptante");
+            if (sheet == null) {
+                sheet = workbook.createSheet("Adoptante");
+            }
+
+            // Crea un encabezado si la hoja está vacía
+            if (sheet.getPhysicalNumberOfRows() == 0) {
+                Row headerRow = sheet.createRow(0);
+                String[] headers = {"ID", "Nombre", "Direccion", "Numero", "Preferencia"};
+                for (int i = 0; i < headers.length; i++) {
+                    Cell headerCell = headerRow.createCell(i);
+                    headerCell.setCellValue(headers[i]);
+                }
+            }
+
+            // Crear una nueva fila para el animal
+            Row row = sheet.createRow(sheet.getLastRowNum() + 1);
+
+            Cell idCell = row.createCell(0);
+            idCell.setCellValue(adoptante.getId());
+
+            Cell nameCell = row.createCell(1);
+            nameCell.setCellValue(adoptante.getName());
+
+            Cell addressCell = row.createCell(2);
+            addressCell.setCellValue(adoptante.getAddress());
+
+            Cell contactNumberCell = row.createCell(3);
+            contactNumberCell.setCellValue(adoptante.getContactNumber());
+
+            Cell adoptionPreferencesCell = row.createCell(4);
+            adoptionPreferencesCell.setCellValue(adoptante.getAdoptionPreferences());
+
+            // Guardar los cambios en el archivo Excel
+            FileOutputStream outputStream = new FileOutputStream(EXCEL_FILE_PATH);
+            workbook.write(outputStream);
+            workbook.close();
+            outputStream.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Actualizar el animal en la hoja de Excel
+    public static void updateAnimalInExcel(Animal animal) {
+        try {
+            FileInputStream inputStream = new FileInputStream("animals.xlsx");
+            Workbook workbook = WorkbookFactory.create(inputStream);
+            Sheet sheet = workbook.getSheetAt(0);
+
+            Row row = sheet.getRow(animal.getId() - 1);
+
+            Cell nameCell = row.getCell(1);
+            nameCell.setCellValue(animal.getName());
+
+            Cell ageCell = row.getCell(2);
+            ageCell.setCellValue(animal.getAge());
+
+            Cell speciesCell = row.getCell(3);
+            speciesCell.setCellValue(animal.getSpecies());
+
+            Cell raceCell = row.getCell(4);
+            raceCell.setCellValue(animal.getRace());
+
+            Cell healthStatusCell = row.getCell(5);
+            healthStatusCell.setCellValue(animal.getHealthStatus());
+
+            Cell descriptionCell = row.getCell(6);
+            descriptionCell.setCellValue(animal.getDescription());
+
+            inputStream.close();
+
+            FileOutputStream outputStream = new FileOutputStream("animals.xlsx");
+            workbook.write(outputStream);
+            workbook.close();
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Eliminar el animal de la hoja de Excel
+    public static void deleteAnimalInExcel(Animal animal) {
+        try {
+            FileInputStream inputStream = new FileInputStream("animals.xlsx");
+            Workbook workbook = WorkbookFactory.create(inputStream);
+            Sheet sheet = workbook.getSheetAt(0);
+
+            Row row = sheet.getRow(animal.getId() - 1);
+            sheet.removeRow(row);
+
+            inputStream.close();
+
+            FileOutputStream outputStream = new FileOutputStream("animals.xlsx");
+            workbook.write(outputStream);
+            workbook.close();
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
